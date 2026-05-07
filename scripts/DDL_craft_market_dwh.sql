@@ -167,3 +167,40 @@ CREATE TABLE IF NOT EXISTS dwh.load_dates_craftsman_report_datamart (
     load_dttm DATE NOT NULL,
     CONSTRAINT load_dates_craftsman_report_datamart_pk PRIMARY KEY (id)
 );
+
+-- Создаю витрину, аналогичную той, которая дана в задании, но адаптированную под клиента
+
+-- DDL витрины данных
+DROP TABLE IF EXISTS dwh.customer_report_datamart; -- меняю мастера на клиента
+
+CREATE TABLE IF NOT EXISTS dwh.customer_report_datamart ( -- меняю мастера на клиента
+    id BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    customer_id BIGINT NOT NULL, -- меняю мастера на клиента
+    customer_name VARCHAR NOT NULL, -- меняю мастера на клиента
+    customer_address VARCHAR NOT NULL, -- меняю мастера на клиента
+    customer_birthday DATE NOT NULL, -- меняю мастера на клиента
+    customer_email VARCHAR NOT NULL, -- меняю мастера на клиента
+    total_spent NUMERIC(15,2) NOT NULL, -- меняю доходы мастера на затраты клиента
+    platform_money BIGINT NOT NULL, -- остальные столбцы под вопросом - нужны ли они? В принципе, удалить всегда успею.
+    count_order BIGINT NOT NULL,
+    avg_price_order NUMERIC(10,2) NOT NULL,
+    median_time_order_completed NUMERIC(10,1),
+    top_product_category VARCHAR NOT NULL, -- топовая категория товаров
+    count_order_created BIGINT NOT NULL,
+    count_order_in_progress BIGINT NOT NULL,
+    count_order_delivery BIGINT NOT NULL,
+    count_order_done BIGINT NOT NULL,
+    count_order_not_done BIGINT NOT NULL,
+    report_period VARCHAR NOT NULL,
+    top_craftsman_id BIGINT, -- топовый мастер
+    CONSTRAINT customer_report_datamart_pk PRIMARY KEY (id) -- меняю мастера на клиента
+);
+
+-- DDL таблицы инкрементальных загрузок
+DROP TABLE IF EXISTS dwh.load_dates_customer_report_datamart; -- меняю мастера на клиента
+
+CREATE TABLE IF NOT EXISTS dwh.load_dates_customer_report_datamart ( -- меняю мастера на клиента
+    id BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    load_dttm DATE NOT NULL,
+    CONSTRAINT load_dates_customer_report_datamart_pk PRIMARY KEY (id) -- меняю мастера на клиента
+);
