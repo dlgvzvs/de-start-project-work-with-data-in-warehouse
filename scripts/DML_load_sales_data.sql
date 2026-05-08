@@ -339,7 +339,7 @@ customer_dwh_delta AS ( -- меняю мастера на клиента
                             (dp.load_dttm > (SELECT COALESCE(MAX(load_dttm),'1900-01-01') FROM dwh.load_dates_craftsman_report_datamart))
 ),
 
-WITH customer_top_craftsman AS ( -- с большим трудом нашёл, где это писать и где потом ссылаться на результаты этих вычислений.
+customer_top_craftsman AS ( -- с большим трудом нашёл, где это писать и где потом ссылаться на результаты этих вычислений.
     SELECT
         cdd.customer_id AS customer_id_for_top_craftsman_id, -- выписываю ID клиентов
         cdd.craftsman_id, -- выпиываю ID мастеров
